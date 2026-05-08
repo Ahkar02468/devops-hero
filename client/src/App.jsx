@@ -22,7 +22,10 @@ function App() {
       setLoading(true);
       setError(null);
       const response = await taskService.getAllTasks();
-      setTasks(response.data);
+      console.log('Service returned:', response);
+      // Ensure we are setting an array even if response structure is different
+      const taskData = Array.isArray(response) ? response : (response.data || []);
+      setTasks(taskData);
     } catch (err) {
       setError('Failed to fetch tasks. Please try again.');
       console.error('Error fetching tasks:', err);
