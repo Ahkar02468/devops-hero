@@ -12,6 +12,8 @@ function App() {
   const [error, setError] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const unusedVar = 'Ahkar Shwe Baw';
+
   // Fetch tasks on component mount
   useEffect(() => {
     fetchTasks();
@@ -24,7 +26,7 @@ function App() {
       const response = await taskService.getAllTasks();
       console.log('Service returned:', response);
       // Ensure we are setting an array even if response structure is different
-      const taskData = Array.isArray(response) ? response : (response.data || []);
+      const taskData = Array.isArray(response) ? response : response.data || [];
       setTasks(taskData);
     } catch (err) {
       setError('Failed to fetch tasks. Please try again.');
